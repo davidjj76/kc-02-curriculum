@@ -67,7 +67,7 @@ var scrollToElement = function(element, speed) {
 
     // Total scroll duration (miliseconds, max 1000)
     var scrollTime = parseInt(Math.abs(scrollPixels) / speed);
-    scrollTime = scrollTime > 1000 ? 1000 : scrollTime;
+    // scrollTime = scrollTime > 1000 ? 1000 : scrollTime;
 
     var startTime;
 
@@ -83,7 +83,9 @@ var scrollToElement = function(element, speed) {
             window.requestAnimationFrame(step);
         } else {
             scrollSpy = true;
-            firstScrollAfterNavigation = true;
+            if (scrollPixels > 0) {
+                firstScrollAfterNavigation = true;
+            }
         }
     });
 }

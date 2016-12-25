@@ -1,11 +1,5 @@
 @import 'reset.css';
 @import 'header.css';
 @import 'navbar.css';
+@import 'sections.css';
 @import 'footer.css';
-
-section {
-	height: 500px;
-	margin: 10px;
-	border: 10px solid black;
-	background-color: red;
-}
