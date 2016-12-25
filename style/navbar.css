@@ -5,6 +5,10 @@
 	background-color: rgba(0, 0, 0, 0.1);
 }
 
+.navbar-opaque {
+	background-color: #323336;
+}
+
 .navbar > .navbar-list {
 	float: right;
 	list-style-type: none;
