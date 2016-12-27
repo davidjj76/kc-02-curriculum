@@ -57,6 +57,11 @@ form.addEventListener('submit', function(event) {
             return false;
         }
     }
+    sendNotification({
+        name: form.elements["form-name"].value,
+        email: form.elements["form-email"].value,
+    });
+    form.reset();
 });
 
 function validateInput(elementInput) {
