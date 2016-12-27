@@ -57,8 +57,41 @@
         <section id="contacto" class="contact">
             <div class="row section-content">
                 <h2 class="section-title">CONTACTA CONMIGO</h2>
-                <div class="col-6"></div>
-                <div class="col-6"></div>
+                <form id="contact-form" class="contact-form" name="contact-me" method="get" novalidate />
+                    <div class="form-row">
+                        <input type="text" id="form-name" name="form-name" placeholder="Tu nombre" required>
+                        <span class="hidden-message">Por favor, introduce tu nombre</span>
+                    </div>
+                    <div class="form-row">
+                        <input type="email" id="form-email" name="form-email" placeholder="Tu email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                        <span class="hidden-message">Por favor, introduce un email válido</span>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="form-phone" name="form-phone" placeholder="Tu teléfono" pattern="^\d{9}$" required>
+                        <span class="hidden-message">Por favor, introduce un teléfono válido</span>
+                    </div>
+                    <div class="form-row">
+                        <textarea id="form-message" name="form-message" placeholder="Tu mensaje" rows="8" required></textarea>
+                        <span class="hidden-message"></span>
+                    </div>
+                    <div class="form-row">
+                        <span>¿Cómo me has conocido?</span>
+                        <label for="known-facebook">Facebook</label>
+                        <input type="radio" name="form-known" value="facebook" id="known-facebook" required>
+                        <label for="known-twitter">Twitter</label>
+                        <input type="radio" name="form-known" value="twitter" id="known-twitter" required>
+                        <label for="known-linkedin">Linkedin</label>
+                        <input type="radio" name="form-known" value="linkedin" id="known-linkedin" required>
+                        <label for="conocido-github">Github</label>
+                        <input type="radio" name="form-known" value="github" id="known-github" required>
+                        <label for="known-other">Otros</label>
+                        <input type="radio" name="form-known" value="other" id="known-other" required>
+                        <span class="hidden-message">Por favor, cuéntame cómo me has conocido</span>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" id="form-send">ENVÍA TU MENSAJE</button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>
@@ -80,6 +113,7 @@
         </div>
     </footer>
     <script src="js/scroll.js"></script>
+    <script src="js/contact-form.js"></script>
 </body>
 
 </html>

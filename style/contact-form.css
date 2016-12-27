@@ -1,0 +1,42 @@
+#contact-form {
+	width: 80%;
+	margin: 0 auto; 
+	text-align: center;
+	padding: 20px;
+}
+
+#contact-form .form-row {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+input:not([type="radio"]), #form-message, #form-send {
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #FFFFFF;
+	color: #777777;
+	padding: 20px;
+	border: 1px solid #CCCCCC;
+	font-size: 1em;
+	transition: all 0.3s ease-in-out;
+}
+
+input:not([type="radio"]):focus, #form-message:focus, #form-send:focus {
+	outline: none;
+	border: 1px solid #777777;
+}
+
+#form-send:hover {
+	background-color: #777777;
+	color: #FFFFFF;
+}
+
+#contact-form .form-row span.hidden-message {
+	display: none;
+	color: #A94442;
+}
+
+#contact-form .form-row span.error-message {
+	display: inline-block;
+	padding: 10px 0;
+}
