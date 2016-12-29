@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+    <script src="js/jquery-3.1.1.js"></script>
 </head>
 
 <body>
     <header class="header">
     </header>
-    <nav class="navbar">
+    <nav class="navbar navbar-opaque">
         <ul class="navbar-list">
             <li class="navbar-item"><a class="navbar-link" href="index.html#">Inicio</a></li>
             <li class="navbar-item"><a class="navbar-link" href="index.html#quien-soy">Quien soy</a></li>
@@ -25,6 +26,20 @@
         </ul>
     </nav>
     <main class="container">
+        <section id="tasks" class="tasks">
+            <div class="row section-content">
+                <h2 class="section-title">LISTA DE TAREAS</h2>
+                <div class="col-6">
+                    <form>
+                        <input type="text" id="newTaskName" name="name" placeholder="Nueva tarea..." required=>
+                        <button type="submit" id="createTask" class="createTask">CREAR</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <ul id="tasksContainer" class="tasksContainer"></ul>
+                </div>
+            </div>
+        </section>
     </main>
     <footer class="footer">
         <span class="footer-text">David Jiménez Jiménez &copy; 2016</span>
@@ -43,6 +58,7 @@
             </a>
         </div>
     </footer>
+    <script src="js/tasks.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,16 @@
 .container {
 	width: 100%;
 	max-width: 1200px;
+	min-height: 100%;
 	margin: 0 auto;
+	margin-bottom: -72px;
 	display: block;
 }
 
 .section-content {
 	/*padding: 50px 0;*/
 	color: #333333;
+	padding-bottom: 50px;
 }
 
 .section-content-reverse {
