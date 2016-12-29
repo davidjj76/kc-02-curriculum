@@ -18,6 +18,7 @@ input:not([type=radio]), #form-message, #form-send {
 	padding: 20px;
 	border: 1px solid #CCCCCC;
 	font-size: 1em;
+	resize: none;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -32,7 +33,7 @@ span.known {
 
 input[type=radio] {
 	outline: none;
-	margin-right: 10px;
+	margin-left: 10px;
 }
 
 #form-send:hover {

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 	var API_URL = 'http://localhost:8000/api/';
 	var tasks = [];
 	var newTaskNameInput = $('#newTaskName'); 
@@ -26,7 +27,7 @@ $(document).ready(function() {
 		} else {
 			for (var i = 0; i < tasks.length; i++) {
 				tasksList += renderTask(tasks[i]);
-			}			
+			}
 			tasksContainer.append(tasksList);
 		}
 	};
@@ -41,7 +42,9 @@ $(document).ready(function() {
 	var removeTaskItem = function(taskId) {
 		var taskItem = $('li.task-item[data-task-id=' + taskId + ']');
 		if (taskItem) {
-			taskItem.remove();
+			taskItem.slideUp(500, function() {
+				$(this).remove();
+			});
 			if (tasks.length == 0) {
 				drawNoTasks();
 			}

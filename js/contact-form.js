@@ -14,8 +14,6 @@ otherInput.setAttribute('placeholder', 'Cómo me has conocido');
 otherInput.setAttribute('required', '');
 otherInput.style.marginTop = '20px';
 
-// Crear también el span para el mensaje de error
-
 for (var i = 0; i < knownInputs.length; i++) {
     knownInputs[i].addEventListener('click', function(event) {
         if (this.value == 'other') {
@@ -61,11 +59,14 @@ form.addEventListener('submit', function(event) {
         name: form.elements["form-name"].value,
         email: form.elements["form-email"].value,
     });
+    if (document.getElementById(otherInput.id)) {
+        otherInput.parentNode.removeChild(otherInput);
+    }
     form.reset();
 });
 
 function validateInput(elementInput) {
-    var errorMessage = document.querySelector('#' + elementInput.id + ' + span');
+    var errorMessage = document.querySelector('#' + elementInput.id + ' ~ span');
     if (elementInput === messageInput) {
         return validateMessageInput(elementInput, errorMessage);
     } else {
