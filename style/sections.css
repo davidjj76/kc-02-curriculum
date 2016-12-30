@@ -1,6 +1,6 @@
 .container {
 	width: 100%;
-	max-width: 1200px;
+	max-width: 960px;
 	min-height: 100%;
 	margin: 0 auto;
 	margin-bottom: -72px;
@@ -52,6 +52,11 @@
 	background-color: rgba(255, 255, 255, 1);
 }
 
+p.section-main-para {
+	text-align: center;
+	padding: 20px 0;
+}
+
 .studies, .about-me {
 	position: relative;
 	width: 100%;
@@ -70,3 +75,66 @@
 .about-me {
 	background-image: url('../images/about-me.jpg');	
 }
+
+section.experience div.time-line {
+	width: 100%;
+	position: relative;
+	padding-top: 40px;
+}
+
+section.experience div.time-line:before {
+	position: absolute;
+	content: "";
+	left: 50%;
+	width: 4px;
+	margin-left: -2px;
+	top: 0;
+	height: 100%;
+	background-color: #222222;
+	border-radius: 2px;
+}
+
+section.experience div.time-line div.time-line-block {
+	position: relative;
+	width: 100%;
+	margin-bottom: 40px;
+	overflow: auto;
+}
+
+section.experience div.time-line div.time-line-block article {
+	width: 44%;
+    border: 1px solid #222;
+    padding: 20px;
+    color: #222;
+    background: #222;
+    text-align: left;
+}
+
+article.left {
+	float: left;
+}
+
+article.right {
+	float: right;
+}
+
+section.experience div.time-line div.time-line-block article::before {
+	position: absolute;
+    content: "";
+    top: 10px;
+    height: 0;
+    width: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+section.experience div.time-line div.time-line-block article.left::before {
+    left: 44%;
+    border-left: 15px solid #222;
+}
+
+section.experience div.time-line div.time-line-block article.right::before {
+    right: 44%;
+    border-right: 15px solid #222;
+}
+
