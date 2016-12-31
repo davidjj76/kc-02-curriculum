@@ -16,7 +16,7 @@
 	color: #FFFFFF;
 	transform: translate(-50%, -50%) scale(0, 0);
 	visibility: hidden;
-    animation: titleAnimation 1.8s ease-in forwards 1s;
+    animation: titleAnimation 1.8s ease-in-out forwards 1s;
 }
 
 .header > .title-container > h1.title {

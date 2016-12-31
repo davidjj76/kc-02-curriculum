@@ -1,3 +1,4 @@
+/* Común a todas las secciones */ 
 .container {
 	width: 100%;
 	max-width: 960px;
@@ -5,6 +6,14 @@
 	margin: 0 auto;
 	margin-bottom: -72px;
 	display: block;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
 }
 
 .section-content {
@@ -17,6 +26,7 @@
 	margin-left: calc(-50vw + 50%);
 	margin-right: calc(-50vw + 50%);
 	color: rgba(255, 255, 255, 1);
+	padding-bottom: 0;
 }
 
 .overlay {
@@ -52,7 +62,7 @@
 	background-color: rgba(255, 255, 255, 1);
 }
 
-p.section-main-para {
+p.section-main-paragraph {
 	text-align: center;
 	padding: 20px 0;
 }
@@ -68,21 +78,63 @@ p.section-main-para {
 	background-size: cover;
 }
 
+/* Sección quién soy */
+.who-i-am {
+	width: 100%;
+}
+
+.who-i-am .personal-info {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	font-size: 0.9em;
+	padding-top: 50px;
+}
+.who-i-am .personal-info .profile-photo {
+}
+
+.who-i-am .personal-info .profile-photo img {
+	height: 200px;
+    max-width: 100%;
+    padding: 8px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid #dedede;
+    box-shadow: 0 8px 10px #999;
+}
+
+.who-i-am .personal-info .personal-info-header {
+	display: inline-block;
+	margin: 20px;
+	padding: 10px 0;
+	border-bottom: 3px solid black;
+	font-family: 'Raleway', sans-serif;
+}
+
+.who-i-am .personal-info span {
+	display: block;
+	color: #333;
+	margin: 5px 0 10px;
+}
+
+.who-i-am .personal-info span > strong {
+	display: block;
+	margin-bottom: 5px;
+}
+
+/* Sección estudios */
 .studies {
 	background-image: url('../images/studies.jpg');
 }
 
-.about-me {
-	background-image: url('../images/about-me.jpg');	
-}
-
-section.experience div.time-line {
+/* Sección experiencia */
+.experience .time-line {
 	width: 100%;
 	position: relative;
 	padding-top: 40px;
 }
 
-section.experience div.time-line:before {
+.experience .time-line:before {
 	position: absolute;
 	content: "";
 	left: 50%;
@@ -94,31 +146,42 @@ section.experience div.time-line:before {
 	border-radius: 2px;
 }
 
-section.experience div.time-line div.time-line-block {
+.experience .time-line .time-line-block {
 	position: relative;
 	width: 100%;
 	margin-bottom: 40px;
 	overflow: auto;
 }
 
-section.experience div.time-line div.time-line-block article {
+.experience .time-line .time-line-block .icon {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	left: 50%;
+	margin-left: -25px;
+	border-radius: 50%;
+	background-color: #222222;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.experience .time-line .time-line-block .icon i {
+	margin: auto;
+	line-height: 50px;
+	font-size: 1.2em;
+}
+
+.experience .time-line .time-line-block .time-line-content {
 	width: 44%;
     border: 1px solid #222;
     padding: 20px;
     color: #222;
     background: #222;
     text-align: left;
+	border-radius: 2px;
 }
 
-article.left {
-	float: left;
-}
-
-article.right {
-	float: right;
-}
-
-section.experience div.time-line div.time-line-block article::before {
+.experience .time-line .time-line-block .time-line-content::before {
 	position: absolute;
     content: "";
     top: 10px;
@@ -128,13 +191,61 @@ section.experience div.time-line div.time-line-block article::before {
     border-bottom: 15px solid transparent;
 }
 
-section.experience div.time-line div.time-line-block article.left::before {
+.experience .time-line .time-line-block .time-line-content.left::before {
     left: 44%;
     border-left: 15px solid #222;
 }
 
-section.experience div.time-line div.time-line-block article.right::before {
+.experience .time-line .time-line-block .time-line-content.right::before {
     right: 44%;
     border-right: 15px solid #222;
 }
 
+.experience .time-line .time-line-block .time-line-content .job-title {
+	color: #FFFFFF;
+	display: inline-block;
+	text-transform: uppercase;
+}
+
+.experience .time-line .time-line-block .time-line-content .job-duration {
+	color: #B3B3B3;
+	font-size: 0.8em;
+	margin-left: 10px;
+}
+
+.experience .time-line .time-line-block .time-line-content .job-category {
+	display: block;
+	color: #B3B3B3;
+	font-size: 0.8em;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+}
+
+.experience .time-line .time-line-block .time-line-content .job-paragraph {
+	color: #FFFFFF;
+	font-weight: 300;
+	font-size: 0.8em;
+	letter-spacing: 1.2px;
+}
+
+/* Seción sobre mí */
+.about-me {
+	background-image: url('../images/about-me.jpg');
+
+}
+
+.about-me-content {
+	display: flex;
+	max-width: 960px;
+	margin: auto; 
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.about-me-item {
+	flex-grow: 1;
+}
+
+/* Sección contacto */
