@@ -7,7 +7,8 @@
 
 .row > div[class^="col-"] {
 	float: left;
-	display: inline-block;	
+	display: inline-block;
+	max-width: 960px;
 }
 
 .col-1 { width: calc(100% * 1 / 12); }

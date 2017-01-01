@@ -16,17 +16,26 @@
 	float: right;
 }
 
+.section-content, 
+.section-content-reverse {
+	padding: 50px 0 25px;
+}
+
 .section-content {
-	/*padding: 50px 0;*/
 	color: #333333;
-	padding-bottom: 50px;
 }
 
 .section-content-reverse {
 	margin-left: calc(-50vw + 50%);
 	margin-right: calc(-50vw + 50%);
 	color: rgba(255, 255, 255, 1);
-	padding-bottom: 0;
+	position: relative;
+	background-attachment: fixed;
+	background-color: #333333;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 600px;
 }
 
 .overlay {
@@ -42,8 +51,12 @@
 .section-title-reverse {
 	position: relative;
 	text-align: center;
-	padding: 20px;
+	padding-bottom: 20px;
 	font-size: 2.4em;
+}
+
+.section-title-reverse {
+	padding-top: 50px;
 }
 
 .section-title::after,
@@ -67,33 +80,17 @@ p.section-main-paragraph {
 	padding: 20px 0;
 }
 
-.studies, .about-me {
-	position: relative;
-	width: 100%;
-	height: 600px;
-	background-attachment: fixed;
-	background-color: #333333;
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
 /* Sección quién soy */
 .who-i-am {
-	width: 100%;
 }
 
-.who-i-am .personal-info {
-	display: flex;
-	flex-direction: column;
+.who-i-am .profile-photo {
+	margin-bottom: 20px;
+	padding: 0 15px;
 	text-align: center;
-	font-size: 0.9em;
-	padding-top: 50px;
-}
-.who-i-am .personal-info .profile-photo {
 }
 
-.who-i-am .personal-info .profile-photo img {
+.who-i-am .profile-photo img {
 	height: 200px;
     max-width: 100%;
     padding: 8px;
@@ -103,10 +100,16 @@ p.section-main-paragraph {
     box-shadow: 0 8px 10px #999;
 }
 
+.who-i-am .personal-info {
+	margin-bottom: 30px;
+	padding: 0 15px; 
+	text-align: center;
+}
+
 .who-i-am .personal-info .personal-info-header {
 	display: inline-block;
-	margin: 20px;
-	padding: 10px 0;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
 	border-bottom: 3px solid black;
 	font-family: 'Raleway', sans-serif;
 }
@@ -122,12 +125,72 @@ p.section-main-paragraph {
 	margin-bottom: 5px;
 }
 
+.who-i-am .introduction {
+	margin-bottom: 20px;
+	padding: 0 15px; 
+	text-align: right;
+}
+
+.who-i-am .introduction .section-title,
+.who-i-am .introduction .introduce, 
+.who-i-am .introduction .section-main-paragraph {
+	text-align: left;
+}
+
+.section-title::after {
+	left: 0;
+	transform: translateX(0);
+}
+
+.who-i-am .introduction .introduce {
+	padding-top: 10px;
+}
+
+.who-i-am .introduction .introduce,
+.who-i-am .introduction .introduce {
+	font-weight: 300;
+}
+
+.who-i-am .accordion {
+	font-weight: 300;
+	padding: 0 15px;
+}
+
+button.accordion-item {
+    background-color: #FFFFFF;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+	border: 1px solid #CCCCCC;
+    transition: 0.4s;
+}
+
+button.accordion-item.active {
+    background-color: #181818;
+    color: #FFFFFF;
+}
+
+button.accordion-item + div.panel {
+    padding: 15px;
+    background-color: #F4F4F4;
+    display: none;
+}
+
+button.accordion-item + div.panel.show {
+    display: block;
+}
+
 /* Sección estudios */
 .studies {
 	background-image: url('../images/studies.jpg');
 }
 
 /* Sección experiencia */
+.experience {
+}
+
 .experience .time-line {
 	width: 100%;
 	position: relative;
@@ -232,15 +295,12 @@ p.section-main-paragraph {
 /* Seción sobre mí */
 .about-me {
 	background-image: url('../images/about-me.jpg');
-
 }
 
-.about-me-content {
+.about-me-flex-row {
 	display: flex;
-	max-width: 960px;
-	margin: auto; 
 	flex-flow: row nowrap;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -249,3 +309,6 @@ p.section-main-paragraph {
 }
 
 /* Sección contacto */
+.contact {
+	margin-bottom: 72px;
+}
