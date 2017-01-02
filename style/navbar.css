@@ -23,6 +23,7 @@
 
 .navbar > .navbar-list > .navbar-item > .navbar-link {
 	position: relative;
+	outline: none;
 	display: inline-block;
 	font-size: 1em;
 	text-decoration: none;

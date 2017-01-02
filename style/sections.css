@@ -4,7 +4,6 @@
 	max-width: 960px;
 	min-height: 100%;
 	margin: 0 auto;
-	margin-bottom: -72px;
 	display: block;
 }
 
@@ -19,23 +18,18 @@
 .section-content, 
 .section-content-reverse {
 	padding: 50px 0 25px;
-}
-
-.section-content {
 	color: #333333;
 }
 
 .section-content-reverse {
 	margin-left: calc(-50vw + 50%);
 	margin-right: calc(-50vw + 50%);
-	color: rgba(255, 255, 255, 1);
 	position: relative;
 	background-attachment: fixed;
-	background-color: #333333;
-	background-position: 50% 50%;
 	background-repeat: no-repeat;
+	background-position: 50% 50%;
 	background-size: cover;
-	height: 600px;
+	color: #FFFFFF;
 }
 
 .overlay {
@@ -47,20 +41,14 @@
 	background-color: rgba(0, 0, 0, 0.75);
 }
 
-.section-title, 
-.section-title-reverse {
+.section-title {
 	position: relative;
 	text-align: center;
 	padding-bottom: 20px;
 	font-size: 2.4em;
 }
 
-.section-title-reverse {
-	padding-top: 50px;
-}
-
-.section-title::after,
-.section-title-reverse::after {
+.section-title::after {
 	content: "";
 	position: absolute;
 	width: 100px;
@@ -71,13 +59,17 @@
 	background-color: #333333;
 }
 
-.section-title-reverse::after {
-	background-color: rgba(255, 255, 255, 1);
+.section-content-reverse .section-title::after {
+	background-color: #FFFFFF;
 }
 
 p.section-main-paragraph {
 	text-align: center;
 	padding: 20px 0;
+}
+
+.section-content-reverse p.section-main-paragraph {
+	position: relative;
 }
 
 /* Sección quién soy */
@@ -94,7 +86,7 @@ p.section-main-paragraph {
 	height: 200px;
     max-width: 100%;
     padding: 8px;
-    background-color: white;
+    background-color: #FFFFFF;
     border-radius: 50%;
     border: 2px solid #dedede;
     box-shadow: 0 8px 10px #999;
@@ -116,7 +108,7 @@ p.section-main-paragraph {
 
 .who-i-am .personal-info span {
 	display: block;
-	color: #333;
+	color: #333333;
 	margin: 5px 0 10px;
 }
 
@@ -137,7 +129,7 @@ p.section-main-paragraph {
 	text-align: left;
 }
 
-.section-title::after {
+.who-i-am .introduction .section-title::after {
 	left: 0;
 	transform: translateX(0);
 }
@@ -157,6 +149,7 @@ p.section-main-paragraph {
 }
 
 button.accordion-item {
+	position: relative;
     background-color: #FFFFFF;
     cursor: pointer;
     padding: 15px;
@@ -164,12 +157,22 @@ button.accordion-item {
     text-align: left;
     outline: none;
 	border: 1px solid #CCCCCC;
-    transition: 0.4s;
+    transition: all 0.4s;
+}
+
+.accordion-item i {
+	position: absolute;
+	right: 20px;
+	transition: transform 0.4s;
 }
 
 button.accordion-item.active {
-    background-color: #181818;
+    background-color: #323336;
     color: #FFFFFF;
+}
+
+button.accordion-item.active i {
+	transform: rotate(180deg);
 }
 
 button.accordion-item + div.panel {
@@ -236,10 +239,10 @@ button.accordion-item + div.panel.show {
 
 .experience .time-line .time-line-block .time-line-content {
 	width: 44%;
-    border: 1px solid #222;
+    border: 1px solid #222222;
     padding: 20px;
-    color: #222;
-    background: #222;
+    color: #222222;
+    background: #222222;
     text-align: left;
 	border-radius: 2px;
 }
@@ -297,18 +300,43 @@ button.accordion-item + div.panel.show {
 	background-image: url('../images/about-me.jpg');
 }
 
-.about-me-flex-row {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
+#about-me-video {
 }
 
-.about-me-item {
+.about-me-flex-row {
+	position: relative;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+}
+
+.about-me-flex-item {
+	flex-basis: calc(100% / 3);
 	flex-grow: 1;
+	padding: 20px;
+}
+
+.about-me-flex-item i {
+	border: 1px solid #FFFFFF;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+	display: block;
+	margin: 0 auto;
+}
+
+.about-me-flex-item h2 {
+	padding: 20px;
+	text-align: center;
+}
+
+.about-me-flex-item p {
+	text-align: center;
 }
 
 /* Sección contacto */
 .contact {
-	margin-bottom: 72px;
 }
