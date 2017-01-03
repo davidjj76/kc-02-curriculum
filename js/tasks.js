@@ -3,7 +3,22 @@ $(document).ready(function() {
 	var API_URL = 'http://localhost:8000/api/';
 	var tasks = [];
 	var newTaskNameInput = $('#newTaskName'); 
-	var tasksContainer = $('#tasksContainer');
+	var tasksContainers = {
+		true: $('#doneTasksContainer'),
+		false: $('#todoTasksContainer')
+	}
+
+	var getTasksByState = function(completed) {
+		return $.grep(tasks, function(task) {
+			return task.completed == completed;
+		});
+	}
+
+	var getTaskById = function(id) {
+		return $.grep(tasks, function(task) {
+			return task.id == id;
+		})[0];
+	}
 
 	var renderTask = function(task) {
 		var taskListItem = '<li class="task-item" data-task-id="' + task.id + '">';
@@ -15,15 +30,17 @@ $(document).ready(function() {
 		return taskListItem;
 	};
 
-	var drawNoTasks = function() {
+	var drawNoTasks = function(tasksContainer) {
 		tasksContainer.append('<li>No tengo tareas pendientes</li>');
 	}
 
-	var drawTasksList = function() {
+	var drawTasksList = function(completed) {
+		var tasks = getTasksByState(completed);
+		var tasksContainer = tasksContainers[completed];
 		var tasksList = '';
 		tasksContainer.empty();
 		if (tasks.length == 0) {
-			drawNoTasks();
+			drawNoTasks(tasksContainer);
 		} else {
 			for (var i = 0; i < tasks.length; i++) {
 				tasksList += renderTask(tasks[i]);
@@ -32,21 +49,44 @@ $(document).ready(function() {
 		}
 	};
 
-	var drawTaskItem = function(newTask) {
-		if (tasks.length == 1) {
-			tasksContainer.empty();
+	var searchPreviousTaskItem = function(tasksContainer, taskId) {
+		var previousTaskItem;
+		tasksListItems = tasksContainer.children('li');
+		for(var i = 0; i < tasksListItems.length; i++) {
+			var itemTaskId = $(tasksListItems[i]).data('taskId');
+			if (taskId > itemTaskId) {
+				previousTaskItem = $(tasksListItems[i]);
+			} 
 		}
-		tasksContainer.append(renderTask(newTask));
+		return previousTaskItem;
 	};
 
-	var removeTaskItem = function(taskId) {
-		var taskItem = $('li.task-item[data-task-id=' + taskId + ']');
+	var insertTask = function(tasksContainer, task) {
+		var previousTaskItem = searchPreviousTaskItem(tasksContainer, task.id); 
+		if (previousTaskItem) {
+			previousTaskItem.after(renderTask(task));
+		} else {
+			tasksContainer.prepend(renderTask(task));
+		}
+	};
+
+	var drawTaskItem = function(newTask) {
+		var tasksContainer = tasksContainers[newTask.completed];
+		if (getTasksByState(newTask.completed).length == 1) {
+			tasksContainer.empty();
+		}
+		insertTask(tasksContainer, newTask);
+	};
+
+	var removeTaskItem = function(deletedTask, previousCompleted) {
+		var taskItem = $('li.task-item[data-task-id=' + deletedTask.id + ']');
 		if (taskItem) {
 			taskItem.slideUp(500, function() {
 				$(this).remove();
 			});
-			if (tasks.length == 0) {
-				drawNoTasks();
+			var taskCompleted = previousCompleted || deletedTask.completed;
+			if (getTasksByState(taskCompleted).length == 0) {
+				drawNoTasks(tasksContainers[taskCompleted]);
 			}
 		}
 	};
@@ -58,13 +98,13 @@ $(document).ready(function() {
 		})
 		.done(function(data, textStatus, jqXHR) {
 			tasks = data;
-			drawTasksList();
+			drawTasksList('true');
+			drawTasksList('false');
 		})
 		.fail(function(jqXHR, textStatus, error) {
 			console.log('fail:', jqXHR, textStatus, error);
 		})
 		.always(function() {
-			console.log('always:');
 		});
 	};
 
@@ -83,7 +123,6 @@ $(document).ready(function() {
 			console.log('fail:', jqXHR, textStatus, error);
 		})
 		.always(function() {
-			console.log('always:');
 		});
 	};
 
@@ -94,13 +133,20 @@ $(document).ready(function() {
 			data: { name: name, completed: completed }
 		})
 		.done(function(data, textStatus, jqXHR) {
-			console.log('done:', data, textStatus, jqXHR);
+			var storedTask = getTaskById(id);
+			var storedCompleted = storedTask.completed;
+			tasks[tasks.indexOf(storedTask)] = data;
+			if (storedCompleted != data.completed) {
+				removeTaskItem(data, storedCompleted);
+				drawTaskItem(data);
+			} else {
+				// TODO: Modificaciones del texto
+			}
 		})
 		.fail(function(jqXHR, textStatus, error) {
 			console.log('fail:', jqXHR, textStatus, error);
 		})
 		.always(function() {
-			console.log('always:');
 		});
 	};
 
@@ -110,16 +156,16 @@ $(document).ready(function() {
 			url: API_URL + 'tasks/' + id
 		})
 		.done(function(data, textStatus, jqXHR) {
+			var deletedTask = getTaskById(id); 
 			tasks = $.grep(tasks, function(task) {
 				return task.id != id;
 			});
-			removeTaskItem(id);
+			removeTaskItem(deletedTask);
 		})
 		.fail(function(jqXHR, textStatus, error) {
 			console.log('fail:', jqXHR, textStatus, error);
 		})
 		.always(function() {
-			console.log('always:');
 		});
 	};
 
@@ -137,9 +183,7 @@ $(document).ready(function() {
 
 	$(document).on('change', 'input.completeTask', function(event) {
 		var taskId = $(this).parent('li.task-item').data('taskId');
-		var task = $.grep(tasks, function(task) {
-			return task.id == taskId;
-		})[0];
+		var task = getTaskById(taskId);
 		updateTask(taskId, task.name, $(this).prop('checked'));
 	});
 

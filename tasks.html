@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/grid.css">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/tasks.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
     <script src="js/jquery-3.1.1.js"></script>
@@ -26,13 +27,22 @@
         </ul>
     </nav>
     <main class="container">
-        <section id="tasks" class="tasks section-content">
+        <section class="tasks section-content">
             <h2 class="section-title">LISTA DE TAREAS</h2>
-            <form>
-                <input type="text" id="newTaskName" name="name" placeholder="Nueva tarea..." required=>
-                <button type="submit" id="createTask" class="createTask">CREAR</button>
+            <form class="tasks-form">
+                <input type="text" id="newTaskName" name="name" placeholder="Teclea nueva tarea y pulsa 'Enter' para añadir a la lista" required>
+                <button type="submit" id="createTask" class="createTask"></button>
             </form>
-            <ul id="tasksContainer" class="tasksContainer"></ul>
+            <div class="row">
+                <div class="col-6">
+                    <h3>POR HACER</h3>
+                    <ul id="todoTasksContainer" class="tasksContainer"></ul>
+                </div>
+                <div class="col-6">
+                    <h3>TERMINADAS</h3>
+                    <ul id="doneTasksContainer" class="tasksContainer"></ul>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="footer">

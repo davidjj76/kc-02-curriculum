@@ -1,0 +1,13 @@
+.tasks {
+	margin-top: 62px; 
+}
+
+.tasks-form {
+	margin: 40px auto;
+	width: 50%;
+	min-width: 480px;
+}
+
+#createTask {
+	display: none;
+}
