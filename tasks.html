@@ -30,12 +30,17 @@
         <section class="tasks section-content">
             <h2 class="section-title">LISTA DE TAREAS</h2>
             <form class="tasks-form">
-                <input type="text" id="newTaskName" name="name" placeholder="Teclea nueva tarea y pulsa 'Enter' para añadir a la lista" required>
+                <input type="text" id="newTaskName" name="name" placeholder="Teclea nueva tarea y pulsa 'Enter' para añadir a la lista">
                 <button type="submit" id="createTask" class="createTask"></button>
             </form>
             <div class="row">
+                <div id="tasks-loader" class="loader-container">
+                    <div class="loader">
+                    </div>
+                    Conectando con el servidor...
+                </div>
                 <div class="col-6 tasks-container">
-                    <h3 class="tasks-container-title">POR HACER</h3>
+                    <h3 class="tasks-container-title">PENDIENTES</h3>
                     <ul id="todoTasksList" class="tasks-list"></ul>
                 </div>
                 <div class="col-6 tasks-container">
