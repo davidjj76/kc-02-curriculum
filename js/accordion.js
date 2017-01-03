@@ -2,7 +2,7 @@ var acc = document.getElementsByClassName('accordion-item');
 var activeAccordion;
 
 for (var i = 0; i < acc.length; i++) {
-    acc[i].onclick = function(){
+    acc[i].onclick = function() {
     	if (activeAccordion && activeAccordion !== this) {
     		toggleAccordion(activeAccordion);
     	}

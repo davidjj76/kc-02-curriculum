@@ -5,6 +5,7 @@
 	min-height: 100%;
 	margin: 0 auto;
 	display: block;
+	margin-bottom: -72px;
 }
 
 .left {
@@ -339,4 +340,5 @@ button.accordion-item + div.panel.show {
 
 /* Sección contacto */
 .contact {
+	margin-bottom: 72px;
 }

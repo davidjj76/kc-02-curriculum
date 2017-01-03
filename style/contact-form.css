@@ -1,6 +1,6 @@
 #contact-form {
 	width: 80%;
-	margin: 0 auto; 
+	margin: 0 auto;
 	text-align: center;
 	padding: 20px;
 }
@@ -10,7 +10,10 @@
 	margin-bottom: 20px;
 }
 
-input:not([type=radio]), #form-message, #form-send {
+input[type=text], 
+input[type=email], 
+#form-message, 
+#form-send {
 	width: 100%;
 	font-family: 'Open Sans', sans-serif;
 	background-color: #FFFFFF;
@@ -22,7 +25,10 @@ input:not([type=radio]), #form-message, #form-send {
 	transition: all 0.3s ease-in-out;
 }
 
-input:not([type=radio]):focus, #form-message:focus, #form-send:focus {
+input[type=text]:focus, 
+input[type=email]:focus, 
+#form-message:focus, 
+#form-send:focus {
 	outline: none;
 	border: 1px solid #777777;
 }

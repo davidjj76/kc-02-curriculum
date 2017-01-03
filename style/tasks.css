@@ -1,5 +1,6 @@
 .tasks {
-	margin-top: 62px; 
+	padding-top: 82px;
+	padding-bottom: 72px;
 }
 
 .tasks-form {
@@ -10,4 +11,75 @@
 
 #createTask {
 	display: none;
+}
+
+.tasks-container {
+	padding: 20px;	
+}
+
+.tasks-container-title {
+	text-align: center;
+	padding: 10px 20px;
+	border-bottom: 2px solid #323336;
+}
+
+.task-item {
+	list-style-type: none;
+	padding: 20px;
+	border-bottom: 1px solid #CCCCCC;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 80px;
+	font-size: 1.2em;
+}
+
+.task-item > span {
+	padding-left: 20px;
+	padding-right: 20px;
+	flex-grow: 1;
+}
+
+.complete-task {
+	display: none;
+}
+
+.complete-task + label {
+    min-width:40px;
+    min-height:40px;
+    max-width:40px;
+    max-height:40px;
+    border-radius: 50%;
+    border: 2px solid #CCCCCC;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.complete-task + label > i {
+    display: inline-block;
+	margin-top: 50%;
+	transform: translateY(-50%);
+}
+
+.complete-task + label.completed {
+	border-color: #42A944;
+	color: #42A944;
+}
+
+.delete-task {
+	visibility: hidden;
+    min-width:40px;
+    min-height:40px;
+    max-width:40px;
+    max-height:40px;
+    border-style: none;
+    background-color: transparent;
+    cursor: pointer;
+	color: #A94442;
+	outline: none;
+}
+
+.task-item:hover .delete-task {
+	visibility: visible;
 }
