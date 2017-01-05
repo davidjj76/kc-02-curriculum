@@ -2,14 +2,17 @@ $(document).ready(function() {
 
     var API_URL = 'http://localhost:8000/api/';
     var tasks = [];
+
     var newTaskNameInput = $('#newTaskName');
+    newTaskNameInput.focus();
+
     var tasksLists = {
         true: $('#doneTasksList'),
         false: $('#todoTasksList')
     }
     var loader = $('#tasks-loader');
 
-    var showLoader = function() {
+    var showLoader = function(xhr) {
         loader.show();
     }
 
@@ -38,17 +41,18 @@ $(document).ready(function() {
     var renderTask = function(task) {
         var taskListItem = '<li class="task-item" data-task-id="' + task.id + '">';
         taskListItem += '<input type="checkbox" id="completeTask-' + task.id + '" class="complete-task" '
-        taskListItem += (task.completed == 'true' ? 'checked' : '') + '/>';
+        taskListItem += (task.completed ? 'checked' : '') + '/>';
         taskListItem += '<label for="completeTask-' + task.id + '"';
-        if (task.completed == 'true') {
+        if (task.completed) {
             taskListItem += ' class="completed">';
             taskListItem += '<i class="fa fa-check fa-2x" aria-hidden="true"></i>';
         } else {
             taskListItem += '>';
         }
         taskListItem += '</label>';
-        taskListItem += '<span>';
+        taskListItem += '<span id="task-name-' + task.id + '">';
         taskListItem += task.name;
+        taskListItem += '<textarea type="text" id="modify-task-' + task.id + '" class="modify-task"/>';
         taskListItem += '</span>';
         taskListItem += '<button class="delete-task">';
         taskListItem += '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>';
@@ -57,9 +61,22 @@ $(document).ready(function() {
         return taskListItem;
     };
 
+    var refreshTask = function(id, name) {
+        var span = $('#task-name-' + id);
+        var input = $('#modify-task-' + id);
+        span.contents().filter(function() {
+            return this.nodeType == 3
+        }).each(function() {
+            this.textContent = name;
+        });
+        input.val('');
+        input.hide();
+        span.css('color', '#323336');
+    }
+
     var drawNoTasks = function(tasksList) {
         var taskListItem = '<li class="task-item no-tasks">';
-        if (tasksList === tasksLists['true']) {
+        if (tasksList === tasksLists[true]) {
 	        taskListItem += 'No he terminado nada';
 	    } else {
 	        taskListItem += 'No tengo tareas pendientes';	    	
@@ -116,7 +133,12 @@ $(document).ready(function() {
         var taskItem = $('li.task-item[data-task-id=' + deletedTask.id + ']');
         if (taskItem) {
         	taskItem.hide('slow', function() { taskItem.remove(); });
-            var taskCompleted = previousCompleted || deletedTask.completed;
+            var taskCompleted;
+            if (previousCompleted === undefined) {
+                taskCompleted = deletedTask.completed;
+            } else {
+                taskCompleted = previousCompleted;
+            }
             if (getTasksByState(taskCompleted).length == 0) {
                 drawNoTasks(tasksLists[taskCompleted]);
             }
@@ -131,8 +153,8 @@ $(document).ready(function() {
             })
             .done(function(data, textStatus, jqXHR) {
                 tasks = data;
-                drawTasksList('true');
-                drawTasksList('false');
+                drawTasksList(false);
+                drawTasksList(true);
             })
             .fail(function(jqXHR, textStatus, error) {
                 console.log('fail:', jqXHR, textStatus, error);
@@ -146,7 +168,13 @@ $(document).ready(function() {
         $.ajax({
                 type: 'POST',
                 url: API_URL + 'tasks',
-                data: { name: name, completed: false },
+                data: JSON.stringify({ name: name, completed: false }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                dataType: 'json',
+                contentType: 'application/json',
                 beforeSend: showLoader
             })
             .done(function(data, textStatus, jqXHR) {
@@ -166,7 +194,13 @@ $(document).ready(function() {
         $.ajax({
                 type: 'PUT',
                 url: API_URL + 'tasks/' + id,
-                data: { name: name, completed: completed },
+                data: JSON.stringify({ name: name, completed: completed }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                dataType: 'json',
+                contentType: 'application/json',
                 beforeSend: showLoader
             })
             .done(function(data, textStatus, jqXHR) {
@@ -177,10 +211,11 @@ $(document).ready(function() {
                     removeTaskItem(data, storedCompleted);
                     drawTaskItem(data);
                 } else {
-                    // TODO: Modificaciones del texto de la tarea
+                    refreshTask(id, name);
                 }
             })
             .fail(function(jqXHR, textStatus, error) {
+                refreshTask(id, name);
                 console.log('fail:', jqXHR, textStatus, error);
             })
             .always(function() {
@@ -192,7 +227,7 @@ $(document).ready(function() {
         $.ajax({
                 type: 'DELETE',
                 url: API_URL + 'tasks/' + id,
-                beforeSend: showLoader
+                beforeSend: showLoader                
             })
             .done(function(data, textStatus, jqXHR) {
                 var deletedTask = getTaskById(id);
@@ -214,15 +249,46 @@ $(document).ready(function() {
         }
     });
 
+    var getTaskId = function(element) {
+        return $(element).parents('li.task-item').data('taskId');
+    }
+
     $(document).on('click', 'button.delete-task', function(event) {
-        var taskId = $(this).parent('li.task-item').data('taskId');
+        var taskId = getTaskId(this);
         deleteTask(taskId);
     });
 
     $(document).on('change', 'input.complete-task', function(event) {
-        var taskId = $(this).parent('li.task-item').data('taskId');
+        var taskId = getTaskId(this);
         var task = getTaskById(taskId);
         updateTask(taskId, task.name, $(this).prop('checked'));
+    });
+
+    $(document).on('click', '.task-item > span', function(event) {
+        if (event.target.nodeName.toLowerCase() == 'textarea') {
+            event.stopPropagation();
+            return;
+        }
+        var taskId = getTaskId(this);
+        var task = getTaskById(taskId);
+        $(this).css('color', 'transparent');
+        var inputText = $(this).children('textarea');
+        inputText.val(task.name);
+        inputText.show();
+        inputText.focus();
+    });
+
+    $(document).on('blur keypress', '.modify-task', function(event) {
+        if (event.type == 'keypress' && event.keyCode != 13) {
+            return;
+        }
+        var taskId = getTaskId(this);
+        var task = getTaskById(taskId);
+        if ($(this).val() == '' || $(this).val() == task.name) {
+            refreshTask(taskId, task.name);
+        } else {
+            updateTask(taskId, $(this).val(), task.completed);            
+        }
     });
 
     getTasks();

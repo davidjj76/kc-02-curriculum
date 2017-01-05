@@ -43,10 +43,26 @@
 }
 
 .task-item > span {
+	position: relative;
 	padding-left: 20px;
 	padding-right: 20px;
-	white-space: pre;
+	word-wrap: break-word;
 	flex-grow: 1;
+	max-width: 320px;
+}
+
+.task-item > span > .modify-task {
+	position: absolute;
+	border: none;
+	padding: 0 20px;
+	width: 100%;
+	left: 0;
+	top: 0;
+	max-width: 320px;
+	word-wrap: break-word;
+	background-color: transparent;
+	color: #4442A9;
+	display: none;
 }
 
 .complete-task {

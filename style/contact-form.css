@@ -12,7 +12,7 @@
 
 input[type=text], 
 input[type=email], 
-#form-message, 
+textarea, 
 #form-send {
 	width: 100%;
 	font-family: 'Open Sans', sans-serif;
@@ -23,6 +23,7 @@ input[type=email],
 	font-size: 1em;
 	resize: none;
 	text-decoration: none;
+	outline: none;
 	transition: all 0.3s ease-in-out;
 }
 
