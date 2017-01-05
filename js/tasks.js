@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    var API_URL = 'http://10.0.2.2:8000/api/';
     var API_URL = 'http://localhost:8000/api/';
     var tasks = [];
 
@@ -75,13 +76,13 @@ $(document).ready(function() {
     }
 
     var drawNoTasks = function(tasksList) {
-        var taskListItem = '<li class="task-item no-tasks">';
+        var taskListItem = '<li class="task-item no-tasks"><span>';
         if (tasksList === tasksLists[true]) {
 	        taskListItem += 'No he terminado nada';
 	    } else {
 	        taskListItem += 'No tengo tareas pendientes';	    	
 	    }
-        taskListItem += '</li>';
+        taskListItem += '</span></li>';
         tasksList.append(taskListItem);
     };
 
@@ -242,10 +243,12 @@ $(document).ready(function() {
             });
     };
 
-    $('#createTask').click(function(event) {
-        event.preventDefault();
-        if (newTaskNameInput.val() != '') {
-            createTask(newTaskNameInput.val());
+    newTaskNameInput.on('keypress', function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            if (newTaskNameInput.val() != '') {
+                createTask(newTaskNameInput.val());
+            }
         }
     });
 

@@ -2,7 +2,7 @@ function sendNotification(data) {
 
     notificationData = formatNotification(data);
     if (!('Notification' in window)) {
-        // El navegador no soporta notificaciones;
+        alert(notificationData.message + '\n' + notificationData.options.body);
     }
     else if (Notification.permission === 'granted') {
         var notification = new Notification(notificationData.message, notificationData.options);
