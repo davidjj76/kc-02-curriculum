@@ -141,10 +141,6 @@ p.section-main-paragraph {
 
 .who-i-am .introduction .introduce {
 	padding-top: 10px;
-}
-
-.who-i-am .introduction .introduce,
-.who-i-am .introduction .introduce {
 	font-weight: 300;
 }
 
@@ -188,6 +184,14 @@ button.accordion-item + div.panel {
 
 button.accordion-item + div.panel.show {
     display: block;
+}
+
+.panel-list {
+	padding: 4px 40px;
+}
+
+.panel-list li {
+	padding: 4px;
 }
 
 /* Sección estudios */

@@ -13,8 +13,7 @@
 }
 
 .footer .footer-icons {
-	float: right;
-	height: 100%;
+	flex-grow: 0;
 }
 
 .footer .footer-icons > .footer-link {

@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-    var API_URL = 'http://10.0.2.2:8000/api/';
     var API_URL = 'http://localhost:8000/api/';
     var tasks = [];
 
@@ -76,13 +75,13 @@ $(document).ready(function() {
     }
 
     var drawNoTasks = function(tasksList) {
-        var taskListItem = '<li class="task-item no-tasks"><span>';
+        var taskListItem = '<li class="task-item no-tasks">';
         if (tasksList === tasksLists[true]) {
 	        taskListItem += 'No he terminado nada';
 	    } else {
 	        taskListItem += 'No tengo tareas pendientes';	    	
 	    }
-        taskListItem += '</span></li>';
+        taskListItem += '</li>';
         tasksList.append(taskListItem);
     };
 
@@ -281,15 +280,21 @@ $(document).ready(function() {
         inputText.focus();
     });
 
-    $(document).on('blur keypress', '.modify-task', function(event) {
-        if (event.type == 'keypress' && event.keyCode != 13) {
+    $(document).on('keypress focusout keyup', '.modify-task', function(event) {
+        var code = event.keyCode || event.which;
+        var ok = event.type == 'keypress' && code == 13;
+        var cancel = event.type == 'focusout' || (event.type == 'keyup' && code == 27);
+
+        if (!ok && !cancel) {
             return;
         }
+
         var taskId = getTaskId(this);
         var task = getTaskById(taskId);
-        if ($(this).val() == '' || $(this).val() == task.name) {
+        if (cancel || $(this).val() == '' || $(this).val() == task.name) {
             refreshTask(taskId, task.name);
         } else {
+            // Modificamos la tarea
             updateTask(taskId, $(this).val(), task.completed);            
         }
     });
