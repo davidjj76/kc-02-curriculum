@@ -19,11 +19,5 @@
 .footer .footer-icons > .footer-link {
 	display: inline-block;
 	margin-left: 10px;
-}
-
-.footer .footer-icons > .footer-link:link,
-.footer .footer-icons > .footer-link:visited,
-.footer .footer-icons > .footer-link:hover,
-.footer .footer-icons > .footer-link:active {
 	color: #FFFFFF;
 }

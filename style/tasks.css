@@ -9,10 +9,6 @@
 	min-width: 480px;
 }
 
-#createTask {
-	display: none;
-}
-
 .tasks-container {
 	padding: 20px;	
 }
