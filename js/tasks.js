@@ -38,6 +38,10 @@ $(document).ready(function() {
         });
     };
 
+    var renderTooltip = function(text) {
+        return '<span class="tooltip">' + text + '</span>'
+    }
+
     var renderTask = function(task) {
         var taskListItem = '<li class="task-item" data-task-id="' + task.id + '">';
         taskListItem += '<input type="checkbox" id="completeTask-' + task.id + '" class="complete-task" '
@@ -45,9 +49,11 @@ $(document).ready(function() {
         taskListItem += '<label for="completeTask-' + task.id + '"';
         if (task.completed) {
             taskListItem += ' class="completed">';
+            taskListItem += renderTooltip('Reinicia esta tarea');
             taskListItem += '<i class="fa fa-check fa-2x" aria-hidden="true"></i>';
         } else {
             taskListItem += '>';
+            taskListItem += renderTooltip('Termina esta tarea');
         }
         taskListItem += '</label>';
         taskListItem += '<span id="task-name-' + task.id + '">';
@@ -55,6 +61,7 @@ $(document).ready(function() {
         taskListItem += '<textarea type="text" id="modify-task-' + task.id + '" class="modify-task"/>';
         taskListItem += '</span>';
         taskListItem += '<button class="delete-task">';
+        taskListItem += renderTooltip('Borra esta tarea');
         taskListItem += '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>';
         taskListItem += '</button>';
         taskListItem += '</li>';
