@@ -39,3 +39,11 @@ a {
     outline: none;
     text-decoration: none;
 }
+
+input {
+    height: 80px;
+}
+
+input:invalid {
+    box-shadow: none;
+}

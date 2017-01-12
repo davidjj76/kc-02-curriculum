@@ -30,7 +30,10 @@
         <section class="tasks section-content">
             <h2 class="section-title">LISTA DE TAREAS</h2>
             <form class="tasks-form">
-                <input type="text" id="newTaskName" name="name" placeholder="Teclea nueva tarea y pulsa 'Enter' para añadir a la lista">
+                <div class="tasks-form-row">
+                    <input type="text" id="newTaskName" name="name" required>
+                    <label for="newTaskName">Teclea nueva tarea y pulsa 'Enter' para añadir a la lista</label>
+                </div>
             </form>
             <div class="row">
                 <div id="tasks-loader" class="loader-container">
