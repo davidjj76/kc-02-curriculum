@@ -1,13 +1,12 @@
 function sendNotification(data) {
 
     notificationData = formatNotification(data);
-    if (!('Notification' in window)) {
+    var notification = Notification || mozNotification || webkitNotification;
+
+    if (typeof(notification) === 'undefined') {
         alert(notificationData.message + '\n' + notificationData.options.body);
-    }
-    else if (Notification.permission === 'granted') {
-        var notification = new Notification(notificationData.message, notificationData.options);
-    } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission(function(permission) {
+    } else {
+        notification.requestPermission(function(permission) {
             if (permission === 'granted') {
                 var notification = new Notification(notificationData.message, notificationData.options);
             }
