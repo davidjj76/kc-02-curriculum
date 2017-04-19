@@ -2,7 +2,7 @@
 
 Ejercicio de la práctica del módulo de HTML5, Javascript y CSS.
 
-###**Notas**
+### **Notas**
 
 * He intentado usar distintos métodos css para organizar los elementos de la página (columnas, flex, float...), para practicar un poco con todos ellos.
 * En toda la página he usado javascript *a pelo*, excepto en la parte de tareas y *Ajax* que me he servido de *jQuery*.
